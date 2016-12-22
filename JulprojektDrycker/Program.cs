@@ -26,7 +26,8 @@ namespace JulprojektDrycker
                 Console.WriteLine("\n--- Beer Inputs ---");
                 foreach (Beer b in beerList)
                 {
-                    Console.WriteLine("{0}, {1}, {2}\%.\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
+                    string procentFix = b.AlcProcent + "%";
+                    Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
             }
             if (wineList.Count > 0)
@@ -34,7 +35,8 @@ namespace JulprojektDrycker
                 Console.WriteLine("\n--- Wine Inputs ---");
                 foreach (Wine b in wineList)
                 {
-                    Console.WriteLine("{0}, {1}, {2}\%.\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
+                    string procentFix = b.AlcProcent + "%";                    
+                    Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
             }
             if (WhiskyList.Count > 0)
@@ -42,7 +44,8 @@ namespace JulprojektDrycker
                 Console.WriteLine("\n--- Whisky Inputs ---");
                 foreach (Whisky b in WhiskyList)
                 {
-                    Console.WriteLine("{0}, {1}, {2}\%.\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
+                    string procentFix = b.AlcProcent + "%";
+                    Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
             }
         }
