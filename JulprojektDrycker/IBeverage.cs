@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JulprojektDrycker
 {
+    // Interface for Beverage.
     interface IBeverage
     {
         string Name { get; set; }

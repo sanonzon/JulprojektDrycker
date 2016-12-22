@@ -18,7 +18,7 @@ namespace JulprojektDrycker
             { 1, "beer"}, {2,"wine" }, { 3, "whisky"}
         };
 
-        // Prints those lists that aren't empty
+        // Prints the every List that isn't empty
         private static void PrintLists()
         {
             if (beerList.Count > 0)
@@ -52,7 +52,7 @@ namespace JulprojektDrycker
         }
 
 
-        // Search for a Beverage
+        // Search for a Beverage in each List.
         public void Search()
         {
             Console.Write("Search for (name): ");
@@ -88,6 +88,8 @@ namespace JulprojektDrycker
 
         }
 
+
+        // Prints the Results.
         public void PrintSearchResult(List<IBeverage> result)
         {
             Console.WriteLine("\n--- RESULTS ---");
@@ -151,6 +153,9 @@ namespace JulprojektDrycker
             }
 
         }
+
+        // Prints a Form wiht input info to add a New Beverage. 
+        // It's Generic. Generating form for <category> is just for Human reminder.
         public static void PrintForm(string category)
         {
             Console.WriteLine("Generating form for '{0}'.", category);
@@ -166,6 +171,7 @@ namespace JulprojektDrycker
 
             double d = validateProcent(p);
 
+            // Puts new info into correct List. A Joined List would work, yes, but i didn't want to build it like that.
             switch (category)
             {
                 case "beer":
@@ -191,23 +197,24 @@ namespace JulprojektDrycker
         
     }
 
-
-    // TODO Kommentera bättre
     
-
     class Program
     {        
+        // The menu of things to choose from.
         public static void PrintMenu()
         {
             Console.WriteLine("1 - Add Beer\n2 - Add Wine\n3 - Add Whisky\n9 - List all your added things\nSearch - NEW FEATURE! Search for a beverage!\n0 - Exit");
             Console.Write("Choice: ");
         }
+
         static void Main(string[] args)
         {
             Console.WriteLine("\n\nWelcome to my minified database of beverages!\nSelect category item with a number.");
             DbMiddleware middleware = new DbMiddleware();
 
             string s = "";
+
+            // Loop until User chooses 0 in menu.
             while (!s.Equals("0"))
             {
                 PrintMenu();
@@ -218,12 +225,7 @@ namespace JulprojektDrycker
                     Console.WriteLine("Bad input, try again.");
                     s = Console.ReadLine();
                 }
-
-//                Console.WriteLine("Chosen category: {0}", middleware.category);
-
-
-            }           
-           
+            }                      
         }
     }
 }

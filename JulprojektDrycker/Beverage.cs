@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JulprojektDrycker
 {
+    // Class inherits from Interface IBeverage
     class Wine : IBeverage
     {
         string name = default(string);
@@ -71,6 +72,8 @@ namespace JulprojektDrycker
         }
 
     }
+
+    // Class inherits from Interface IBeverage
     class Beer : IBeverage
     {
         string name = default(string);
@@ -134,6 +137,8 @@ namespace JulprojektDrycker
             name = n; beerType = t; procent = proc; desc = d;
         }
     }
+
+    // Class inherits from Interface IBeverage
     class Whisky : IBeverage
     {
         string name = default(string);
@@ -196,6 +201,8 @@ namespace JulprojektDrycker
             name = n; whiskyType = t; procent = proc; desc = d;
         }
     }
+
+    //Subclass to Beer
     class Stout : Beer
     {
         string name = default(string);
