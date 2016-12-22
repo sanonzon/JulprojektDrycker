@@ -10,7 +10,7 @@ namespace JulprojektDrycker
     {
         public static List<Beer> beerList = new List<Beer>();
         public static List<Wine> wineList = new List<Wine>();
-        public static List<Whisky> WhiskyList = new List<Whisky>();
+        public static List<Whisky> whiskyList = new List<Whisky>();
 
         public static string category;
         private Dictionary<int, string> categoryDict = new Dictionary<int, string>()
@@ -26,6 +26,7 @@ namespace JulprojektDrycker
                 Console.WriteLine("\n--- Beer Inputs ---");
                 foreach (Beer b in beerList)
                 {
+                    Console.WriteLine(b.ToString());
                     string procentFix = b.AlcProcent + "%";
                     Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
@@ -39,14 +40,61 @@ namespace JulprojektDrycker
                     Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
             }
-            if (WhiskyList.Count > 0)
+            if (whiskyList.Count > 0)
             {
                 Console.WriteLine("\n--- Whisky Inputs ---");
-                foreach (Whisky b in WhiskyList)
+                foreach (Whisky b in whiskyList)
                 {
                     string procentFix = b.AlcProcent + "%";
                     Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
+            }
+        }
+
+
+        // Search for a Beverage
+        public void Search()
+        {
+            Console.Write("Search for (name): ");
+            string s = Console.ReadLine();
+
+            List<IBeverage> result = new List<IBeverage>();
+            foreach(Whisky b in whiskyList)
+            {
+                if (b.Name.Contains(s))
+                {
+                    result.Add(b);
+                }
+            }
+            foreach(Wine b in wineList)
+            {
+                if (b.Name.Contains(s))
+                {
+                    result.Add(b);
+                }
+            }
+            foreach(Beer b in beerList)
+            {
+                if (b.Name.Contains(s))
+                {
+                    result.Add(b);
+                }
+            }
+
+            if (result.Count > 0)
+            {
+                PrintSearchResult(result);
+            }
+
+        }
+
+        public void PrintSearchResult(List<IBeverage> result)
+        {
+            Console.WriteLine("\n--- RESULTS ---");
+            foreach(var item in result)
+            {
+                string procentFix = item.AlcProcent + "%";
+                Console.WriteLine("\n{0}, {1}, {2}.\n{3}", item.Name, item.Type, procentFix, item.Description);
             }
         }
 
@@ -73,6 +121,10 @@ namespace JulprojektDrycker
                 {
                     return true;
                 }
+            }
+            else if (s.ToLower().Equals("search")){
+                Search();
+                return true;                
             }
             return false;
         }
@@ -117,13 +169,19 @@ namespace JulprojektDrycker
             switch (category)
             {
                 case "beer":
-                    DbMiddleware.beerList.Add(new Beer(name,type,d,desc));
+                    if (type.ToLower().Equals("stout"))
+                    {
+                        DbMiddleware.beerList.Add(new Stout(name, type, d, desc));
+                    }else
+                    {
+                        DbMiddleware.beerList.Add(new Beer(name, type, d, desc));
+                    }                    
                     break;
                 case "wine":
                     DbMiddleware.wineList.Add(new Wine(name, type, d, desc));
                     break;
                 case "whisky":
-                    DbMiddleware.WhiskyList.Add(new Whisky(name, type, d, desc));
+                    DbMiddleware.whiskyList.Add(new Whisky(name, type, d, desc));
                     break;
                 default:
                     break; // Shouldn't get here.                
@@ -141,12 +199,12 @@ namespace JulprojektDrycker
     {        
         public static void PrintMenu()
         {
-            Console.WriteLine("\n\nWelcome to my minified database of beverages!\nSelect category item with a number.");
-            Console.WriteLine("1 - Beer\n2 - Wine\n3 - Whisky\n9 - List all your added things\n0 - Exit");
+            Console.WriteLine("1 - Add Beer\n2 - Add Wine\n3 - Add Whisky\n9 - List all your added things\nSearch - NEW FEATURE! Search for a beverage!\n0 - Exit");
             Console.Write("Choice: ");
         }
         static void Main(string[] args)
         {
+            Console.WriteLine("\n\nWelcome to my minified database of beverages!\nSelect category item with a number.");
             DbMiddleware middleware = new DbMiddleware();
 
             string s = "";

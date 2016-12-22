@@ -196,4 +196,16 @@ namespace JulprojektDrycker
             name = n; whiskyType = t; procent = proc; desc = d;
         }
     }
+    class Stout : Beer
+    {
+        string name = default(string);
+        string beerType = default(string);
+        double procent = default(double);
+        string desc = default(string);
+
+        public Stout(string n, string t, double proc, string d) : base(n, t, proc, d)
+        {
+            name = n; beerType = t; procent = proc; desc = d;
+        }
+    }
 }
