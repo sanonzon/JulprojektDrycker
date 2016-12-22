@@ -23,26 +23,26 @@ namespace JulprojektDrycker
         {
             if (beerList.Count > 0)
             {
-                Console.WriteLine("--- Beer Inputs ---");
+                Console.WriteLine("\n--- Beer Inputs ---");
                 foreach (Beer b in beerList)
                 {
-                    Console.WriteLine("{0}, {1}, {2}\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
+                    Console.WriteLine("{0}, {1}, {2}\%.\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
                 }
             }
             if (wineList.Count > 0)
             {
-                Console.WriteLine("--- Wine Inputs ---");
+                Console.WriteLine("\n--- Wine Inputs ---");
                 foreach (Wine b in wineList)
                 {
-                    Console.WriteLine("{0}, {1}, {2}\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
+                    Console.WriteLine("{0}, {1}, {2}\%.\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
                 }
             }
             if (WhiskyList.Count > 0)
             {
-                Console.WriteLine("--- Whisky Inputs ---");
+                Console.WriteLine("\n--- Whisky Inputs ---");
                 foreach (Whisky b in WhiskyList)
                 {
-                    Console.WriteLine("{0}, {1}, {2}\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
+                    Console.WriteLine("{0}, {1}, {2}\%.\n{3}", b.Name, b.Type, b.AlcProcent, b.Description);
                 }
             }
         }
@@ -99,13 +99,13 @@ namespace JulprojektDrycker
         public static void PrintForm(string category)
         {
             Console.WriteLine("Generating form for '{0}'.", category);
-            Console.Write("\nName: ");
+            Console.Write("Name: ");
             string name = Console.ReadLine();
-            Console.Write("\nType: ");
+            Console.Write("Type: ");
             string type = Console.ReadLine();
-            Console.Write("\n%: ");
+            Console.Write("%: ");
             string p = Console.ReadLine();
-            Console.Write("\nDescription: ");
+            Console.Write("Description: ");
             string desc = Console.ReadLine();
             Console.WriteLine();
 
@@ -138,8 +138,9 @@ namespace JulprojektDrycker
     {        
         public static void PrintMenu()
         {
-            Console.WriteLine("Welcome to my minified database of beverages!\nSelect category item with a number.\n");
+            Console.WriteLine("\n\nWelcome to my minified database of beverages!\nSelect category item with a number.");
             Console.WriteLine("1 - Beer\n2 - Wine\n3 - Whisky\n9 - List all your added things\n0 - Exit");
+            Console.Write("Choice: ");
         }
         static void Main(string[] args)
         {
