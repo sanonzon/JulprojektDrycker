@@ -89,7 +89,10 @@ namespace JulprojektDrycker
         }
 
 
-        // Prints the Results.
+        // Prints the Results. Can get which class type it is with:
+        //      item.ToString().Substring(item.ToString().LastIndexOf(".")+1)
+        //      Getting either Beer, Wine, Whisky or Stout.
+        //      But i choose not to do that.
         public void PrintSearchResult(List<IBeverage> result)
         {
             Console.WriteLine("\n--- RESULTS ---");
