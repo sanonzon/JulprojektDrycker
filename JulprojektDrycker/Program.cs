@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace JulprojektDrycker
 {
+    // My shitty wannabe database.
     class DbMiddleware
     {
         public static List<Beer> beerList = new List<Beer>();
@@ -238,7 +239,7 @@ namespace JulprojektDrycker
 
             string s = "";
 
-            // Loop until User chooses 0 in menu.
+            // Loop until User chooses to exit.
             while (!s.ToLower().Equals("exit"))
             {
                 PrintMenu();
