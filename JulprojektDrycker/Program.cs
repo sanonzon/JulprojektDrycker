@@ -26,7 +26,6 @@ namespace JulprojektDrycker
                 Console.WriteLine("\n--- Beer Inputs ---");
                 foreach (Beer b in beerList)
                 {
-                    Console.WriteLine(b.ToString());
                     string procentFix = b.AlcProcent + "%";
                     Console.WriteLine("{0}, {1}, {2}.\n{3}", b.Name, b.Type, procentFix, b.Description);
                 }
@@ -99,7 +98,7 @@ namespace JulprojektDrycker
             foreach(var item in result)
             {
                 string procentFix = item.AlcProcent + "%";
-                Console.WriteLine("\n{0}, {1}, {2}.\n{3}", item.Name, item.Type, procentFix, item.Description);
+                Console.WriteLine("{0}, {1}, {2}.\n{3}", item.Name, item.Type, procentFix, item.Description);
             }
         }
 
@@ -122,14 +121,14 @@ namespace JulprojektDrycker
                     PrintLists();
                     return true;
                 }
-                else if (key == 0)
-                {
-                    return true;
-                }
             }
             else if (s.ToLower().Equals("search")){
                 Search();
                 return true;                
+            }
+            else if (s.ToLower().Equals("exit"))
+            {
+                return true;
             }
             return false;
         }
@@ -139,40 +138,62 @@ namespace JulprojektDrycker
     class Form
     {
         // If User is bad and writes string instead of double or int. Sets value to 0.0...
-        public static double validateProcent(string s)
-        {
-            double d;
-            if (s.Contains(","))
+        public static string ReplaceComma(string s)
+        {            
+            if (s.Contains(".")) 
             {
-                s.Replace(",", ".");
+               s = s.Replace(".", ",");
             }
-            if(double.TryParse(s, out d))
+            return s;
+        }
+        public static bool ValidateDouble(string s)
+        {            
+            try
             {
-                return d;
+                double.Parse(s);
             }
-            else
+            catch (FormatException)
             {
-                return 0.0;
+                Console.WriteLine("'{0}' is not a number, stop being a retard.",s);
+                return false;
+            }
+            catch(OverflowException)
+            {
+                Console.WriteLine("Value was either too large or too small for a Double.");
+                return false;
             }
 
+            return true;            
         }
 
         // Prints a Form wiht input info to add a New Beverage. 
         // It's Generic. Generating form for <category> is just for Human reminder.
         public static void PrintForm(string category)
         {
+
             Console.WriteLine("Generating form for '{0}'.", category);
             Console.Write("Name: ");
             string name = Console.ReadLine();
             Console.Write("Type: ");
             string type = Console.ReadLine();
-            Console.Write("%: ");
-            string p = Console.ReadLine();
+
+            Console.Write("Percentage Alcohol: ");
+            string p = ReplaceComma(Console.ReadLine());            
+
+            while (!ValidateDouble(p))
+            {
+                Console.Write("Percentage Alcohol: ");
+                p = ReplaceComma(Console.ReadLine());
+            }
+            double d = double.Parse(p);
+
+
+
             Console.Write("Description: ");
             string desc = Console.ReadLine();
             Console.WriteLine();
 
-            double d = validateProcent(p);
+
 
             // Puts new info into correct List. A Joined List would work, yes, but i didn't want to build it like that.
             switch (category)
@@ -206,7 +227,7 @@ namespace JulprojektDrycker
         // The menu of things to choose from.
         public static void PrintMenu()
         {
-            Console.WriteLine("1 - Add Beer\n2 - Add Wine\n3 - Add Whisky\n9 - List all your added things\nSearch - NEW FEATURE! Search for a beverage!\n0 - Exit");
+            Console.WriteLine("1 - Add Beer\n2 - Add Wine\n3 - Add Whisky\n9 - List all your added things\nSearch - NEW FEATURE! Search for a beverage!\nExit - Terminate program.");
             Console.Write("Choice: ");
         }
 
@@ -218,14 +239,14 @@ namespace JulprojektDrycker
             string s = "";
 
             // Loop until User chooses 0 in menu.
-            while (!s.Equals("0"))
+            while (!s.ToLower().Equals("exit"))
             {
                 PrintMenu();
                 s = Console.ReadLine();
 
                 while (!middleware.checkCategory(s))
                 {
-                    Console.WriteLine("Bad input, try again.");
+                    Console.WriteLine("Bad input, try again.\nChoice: ");
                     s = Console.ReadLine();
                 }
             }                      
